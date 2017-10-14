@@ -33,4 +33,6 @@ article {
     width: 50%;
     height: 100%;
 }
-
+#content-container {
+    display: none;
+}
