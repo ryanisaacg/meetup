@@ -1,0 +1,34 @@
+:root {
+    --main-bg-color: #FFC107;
+    --main-accent-color: #6200EA;
+}
+html {
+    background-color: #eee;
+}
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    font-family: 'Roboto Slab', serif;
+}
+h1 {
+    width: 100%;
+    text-align: center;
+    background-color: var(--main-bg-color);
+    padding: 10px 0px 10px 0px;
+}
+article {
+    display: flex;
+    height: 100%;
+}
+#sidebar {
+    width: 25%;
+    height: 100%;
+}
+#main-content {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    height: 100%;
+}
+
