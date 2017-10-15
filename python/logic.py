@@ -1,7 +1,12 @@
 from google.oauth2 import id_token
 from google.auth.transport import requests
+import databaseConnection
 
 CLIENT_ID = "776193161746-7hdn119r7hp3lg8ovl4s87q54fm135fk.apps.googleusercontent.com"
+
+def login(token):
+    id = get_id_from_token(token)
+    databaseConnection.addUser(id)
 
 def get_id_from_token(token):
     userid = None
