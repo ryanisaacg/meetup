@@ -1,22 +1,19 @@
 const BUTTON_TEXT = 'Meet Up!'
+
+const create = (type, children) => {
+    const elem =  document.createElement(type)
+    children.map(child => document.appendChild)
+}
+const text = (text) => document.createTextNode(text)
+
 const new_post = (name, status, body) => {
-    const post = document.createElement('details')
-    const summary = document.createElement('summary')
-    const contents = document.createElement('div')
-    const name_widget = document.createElement('b')
-    name_widget.appendChild(document.createTextNode(name))
-    const status_widget = document.createElement('i')
-    status_widget.appendChild(document.createTextNode(status))
-    const button_widget = document.createElement('button')
-    button_widget.appendChild(document.createTextNode(BUTTON_TEXT))
-    contents.appendChild(name_widget)
-    contents.appendChild(status_widget)
-    contents.appendChild(button_widget)
-    summary.appendChild(contents)
-    post.appendChild(summary)
-    post.appendChild(document.createTextNode(body))
-    const post_container = document.getElementById('main-content')
-    post_container.appendChild(post)
+    document.getElementById('main-content')
+        .appendChild(
+            create('details', 
+                create('summary',
+                    create('b', text(name)),
+                    create('i', text(status)),
+                    create('button', text(BUTTON_TEXT)))))
 }
 
 function onSignIn(googleUser) {
