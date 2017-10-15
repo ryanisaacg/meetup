@@ -53,7 +53,7 @@ article {
     flex-direction: column;
 }
 /* A post object */
-details {
+details , #friends-feed div {
     border-style: solid;
     border-color: var(--main-bg-color);
     border-width: 1px;
@@ -101,7 +101,7 @@ details summary::-webkit-details-marker { display:none; }
 summary div {
     width: 75%;
 }
-summary div * {
+summary div *, #friends-feed div * {
     margin-left: 15px;
 }
 /* The event updater */
