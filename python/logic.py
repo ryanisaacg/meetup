@@ -21,6 +21,8 @@ def getFriends(token):
 
 def addFriend(id, otherId):
     return databaseConnection.addFriend(id, otherId)
+def createEvent(userId,eventName,startTime,endTime):
+    return databaseConnetion.createEvent(userId,eventName,startTime,endTime)
 def get_id_from_token(token):
     userid = None
     try:
