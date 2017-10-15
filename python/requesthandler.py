@@ -26,9 +26,9 @@ class Handler(SimpleHTTPRequestHandler):
             response = logic.addFriend(logic.get_id_from_token(token),friendId)
         elif "createEvent" in self.path:
             eventName = data["eventName"]
-            starTime = data["startTime"]
+            startTime = data["startTime"]
             endTime = data["endTime"]
-            response = logic.addEvent(logic.get_id_from_token(token), eventName, startTime, endTime)
+            response = logic.createEvent(logic.get_id_from_token(token), eventName, startTime, endTime)
         elif "joinEvent" in self.path:
             eventId = ["eventId"]
             response = logic.joinEvent(logic.get_id_from_token(token),eventId)

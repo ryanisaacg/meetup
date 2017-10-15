@@ -1,6 +1,7 @@
 <html>
     <head>
         <title> Sign In  </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="google-signin-client_id" content="776193161746-7hdn119r7hp3lg8ovl4s87q54fm135fk.apps.googleusercontent.com">
         <link rel="stylesheet" type="text/css" href="../css/index.css">
         <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
@@ -14,6 +15,13 @@
         </div>
         <article id="content-container">
             <section id="sidebar">
+                <h2 id="username"></h2>
+                <div id="event-updater">
+                    <input id="event-text" placeholder="Event Name"/> <br>
+                    at <input id="event-start" placeholder="Start Time"/> <br>
+                    for <input id="event-duration" placeholder="Duration"/> <br>
+                    <button onclick="makeEvent()">Create an Event</button>
+                </div>
             </section>
             <section id="main-content">
                 <div id="friends-bar">
