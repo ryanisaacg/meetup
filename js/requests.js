@@ -1,3 +1,21 @@
+const BUTTON_TEXT = 'Meet Up!'
+
+const create = (type, children) => {
+    const elem =  document.createElement(type)
+    children.map(child => document.appendChild)
+}
+const text = (text) => document.createTextNode(text)
+
+const new_post = (name, status, body) => {
+    document.getElementById('main-content')
+        .appendChild(
+            create('details', 
+                create('summary',
+                    create('b', text(name)),
+                    create('i', text(status)),
+                    create('button', text(BUTTON_TEXT)))))
+}
+
 function onSignIn(googleUser) {
     const token = googleUser.getAuthResponse().id_token
     const name = googleUser.getBasicProfile().getName()
