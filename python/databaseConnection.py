@@ -9,7 +9,7 @@ def addUser(id, username):
     if not idInDatabase(id):
         database.users.insert_one(
             {
-                "id": id,
+                "id": str(id),
                 "username": username,
                 "friends": [],
                 "eventId": None
@@ -131,12 +131,7 @@ def printEvents():
         print(event)
 
 addUser("144", "danny")
-#addUser(42, "alex")
-#addUser(7, "nathan")
-#addFriend(144, 42)
-#addFriend(144, 7)
-#changeUsername(42, "andrew")
-#print(type(getById(144)))
-#printUsers()
-#tempId = createEvent("memetest", 144, 6, 6)
-#addAttendee(42, tempId)
+addUser("42", "alex")
+addUser("7", "nathan")
+addFriend(144, 42)
+addFriend(144, 7)
