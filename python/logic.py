@@ -4,10 +4,10 @@ import databaseConnection
 
 CLIENT_ID = "776193161746-7hdn119r7hp3lg8ovl4s87q54fm135fk.apps.googleusercontent.com"
 
-def login(token):
+def login(token, username):
     id = get_id_from_token(token)
-    if not idInDatabase(id):
-        databaseConnection.addUser(id)
+    if not databaseConnection.idInDatabase(id):
+        databaseConnection.addUser(id, username)
 
 getUsername = databaseConnection.getUsername
 
