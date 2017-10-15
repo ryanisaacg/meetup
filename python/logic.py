@@ -8,6 +8,7 @@ def login(token):
     id = get_id_from_token(token)
     if not idInDatabase(id):
         databaseConnection.addUser(id)
+    return id
 
 getUsername = databaseConnection.getUsername
 
