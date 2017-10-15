@@ -11,11 +11,16 @@ class Handler(SimpleHTTPRequestHandler):
         length = int(self.headers['content-length'])
         data_string = self.rfile.read(length).decode('utf-8')
         data = json.loads(data_string)
-        if "sign_in" in self.path:
-            token = data["token"]
+        token = data["token"]
+        if "signIn" in self.path:
             username = data["username"]
             id = logic.login(token, username)
             response = { "id": id }
+        elif "getFriends" in self.path:
+            response = logic.getFriends(token)
+        elif "addFriend" in self.path:
+            friendId = data["friendId"]
+            response = logic.addFriend(logic.get_id_from_token(token),friendId)
         response_string = json.dumps(response)
         self.send_response(200)
         self.send_header('Content-type', 'text/html')
