@@ -37,6 +37,7 @@ def getUsername(id):
     else:
         return None
 
+#lets user with ID number id to change their username
 def changeUsername(id, newUsername):
     if idInDatabase(id):
         database.users.update_one(
@@ -79,6 +80,7 @@ def printUsers():
     for item in database.users.find():
         print(item)
 
+#creates new event and adds event ID to user info
 def createEvent(title, creatorId, startTime, duration):
     id = str(uuid.uuid4())
     database.users.update_one(
@@ -97,6 +99,7 @@ def createEvent(title, creatorId, startTime, duration):
     )
     return id
 
+#add attendee to event using user id and event id
 def addAttendee(userId, eventId):
     if not userId in database.events.find({"id": eventId})[0]["attendees"]:
         database.events.update(
@@ -104,21 +107,25 @@ def addAttendee(userId, eventId):
             {"$push": {"attendees": userId}}
         )
 
+#gets event info from event id
 def getEvent(id):
     if eventInDatabase(id):
         return database.events.find({"id": id})[0]
     else:
         return None
 
+#returns if the event with ID number id exists
 def eventInDatabase(id):
     return database.events.find({"id": id}).count() > 0
 
+#get list of attendees for a given event ID number id
 def getAttendees(id):
     if eventInDatabase(id):
         return getEvent(id)["attendees"]
     else:
         return None
 
+#prints information for all events
 def printEvents():
     for event in database.events.find():
         print(event)
