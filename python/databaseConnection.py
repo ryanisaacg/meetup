@@ -1,9 +1,10 @@
 from pymongo import MongoClient
 
+client = MongoClient()
+database = client.primer
+
 def addUser(id):
-    client = MongoClient()
-    database = client.primer
-    if not idInDatabase(id, database):
+    if not idInDatabase(id):
         #TODO add usernames and other info to database
         database.users.insert_one(
             {
@@ -11,9 +12,14 @@ def addUser(id):
             }
         )
 
-def idInDatabase(id, database):
+def idInDatabase(id):
     return database.users.find({"id": id}).count() > 0
 
-def printDatabase(database):
+def printDatabase():
     for item in database.users.find():
         print(item)
+
+addUser(144)
+addUser(3)
+addUser(144)
+printDatabase()
