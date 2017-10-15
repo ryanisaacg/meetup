@@ -1,6 +1,7 @@
 const BUTTON_TEXT = 'Meet Up!'
 
 let token;
+let id;
 
 function create(type) {
     const elem =  document.createElement(type)
@@ -24,11 +25,13 @@ const new_post = (name, status, body) => {
 
 function onSignIn(googleUser) {
     token = googleUser.getAuthResponse().id_token
+    id = googleUser.getBasicProfile().getId()
     const name = googleUser.getBasicProfile().getName()
     post_request('signIn', { 'token': token, 'username': name }, (response) => {
         document.title = "Meet Up!"
         document.getElementById('sign-in-container').style.display = 'none'
         document.getElementById('content-container').style.display = 'flex'
+        document.getElementById('username').innerHTML = name
         refresh()
     })
 }
@@ -50,8 +53,48 @@ function refresh() {
             contents.removeChild(contents.firstChild);
         }
         response.map((child) => {
-            new_post(child.username, "Status:...", "BODY!")
+            let status;
+            if(child.event == null) {
+                status = "Idle";
+            } else {
+                if(child.event.attendees.includes(id)) {
+                    status = "Joinable"
+                } else {
+                    status = "Busy"
+                }
+            }
+            console.log(child)
+            new_post(child.username, status, "BODY!")
         })
+    })
+}
+
+function makeEvent() {
+    const text = document.getElementById('event-text').value
+    const start = document.getElementById('event-start').value
+    const duration = document.getElementById('event-duration').value
+    const datetime = /^(\d\d)\:(\d\d)$/
+    const start_parsed = datetime.exec(start)
+    if(start_parsed == null) {
+        alert("Please put start time in HH:MM format")
+        return
+    }
+    const duration_parsed = datetime.exec(duration)
+    if(duration_parsed == null) {
+        alert("Please put duration in HH:MM format")
+        return
+    }
+    const start_hour = start_parsed[1] - 0
+    const start_minute = start_parsed[2] - 0
+    const duration_hour = duration_parsed[1] - 0
+    const duration_minute = duration_parsed[2] - 0
+    const startDate = new Date()
+    const endDate = new Date()
+    startDate.setHours(start_hour)
+    startDate.setMinutes(start_minute)
+    endDate.setHours(start_hour + duration_hour)
+    endDate.setMinutes(start_minute + duration_minute)
+    post_request('createEvent', { 'token': token, 'eventName': text, 'startTime': startDate.getTime(), 'endTime': endDate.getTime() }, (response) => {
     })
 }
         
