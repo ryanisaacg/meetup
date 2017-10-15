@@ -6,7 +6,11 @@ CLIENT_ID = "776193161746-7hdn119r7hp3lg8ovl4s87q54fm135fk.apps.googleuserconten
 
 def login(token):
     id = get_id_from_token(token)
-    databaseConnection.addUser(id)
+    if not idInDatabase(id):
+        databaseConnection.addUser(id)
+
+getUsername = databaseConnection.getUsername
+
 
 def get_id_from_token(token):
     userid = None
