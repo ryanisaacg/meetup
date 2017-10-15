@@ -12,6 +12,11 @@ def login(token):
 
 getUsername = databaseConnection.getUsername
 
+def getFriends(id):
+    friends = []
+    for friend in databaseConnection.getFriends(id):
+        friends.append({"id": id, "username": databaseConnection.getUsername(id)})
+    return friends
 
 def get_id_from_token(token):
     userid = None
