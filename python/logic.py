@@ -18,6 +18,9 @@ def getFriends(id):
         friends.append({"id": id, "username": databaseConnection.getUsername(id)})
     return friends
 
+def addFriend(id, otherId):
+    return databaseConnection.addFriend(id, otherId)
+
 def get_id_from_token(token):
     userid = None
     try:
