@@ -16,8 +16,11 @@ class Handler(SimpleHTTPRequestHandler):
             username = data["username"]
             id = logic.login(token, username)
             response = { "id": id }
-        elif "getFriends" in self.path
+        elif "getFriends" in self.path:
             response = logic.getFriends(token)
+        elif "addFriend" in self.path:
+            friendId = data["friendId"]
+            response = logic.addFriend(logic.get_id_from_token(token),friendId)
         response_string = json.dumps(response)
         self.send_response(200)
         self.send_header('Content-type', 'text/html')
