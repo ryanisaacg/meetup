@@ -16,7 +16,7 @@ def getFriends(token):
     id = get_id_from_token(token)
     friends = []
     for friend in databaseConnection.getFriends(id):
-        friends.append({"id": id, "username": databaseConnection.getUsername(id)})
+        friends.append({"id": friend, "username": databaseConnection.getUsername(friend)})
     return friends
 
 def addFriend(id, otherId):
