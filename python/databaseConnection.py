@@ -11,7 +11,8 @@ def addUser(id, username):
             {
                 "id": id,
                 "username": username,
-                "friends": []
+                "friends": [],
+                "eventId": None
             }
         )
         return True
@@ -80,6 +81,10 @@ def printUsers():
 
 def createEvent(title, creatorId, startTime, duration):
     id = str(uuid.uuid4())
+    database.users.update_one(
+        {"id": creatorId},
+        {"$set": {"eventId": id}}
+    )
     database.events.insert_one(
         {
             "title": title,
@@ -126,5 +131,5 @@ def printEvents():
 #changeUsername(42, "andrew")
 #print(type(getById(144)))
 #printUsers()
-tempId = createEvent("memetest", 144, 6, 6)
-addAttendee(42, tempId)
+#tempId = createEvent("memetest", 144, 6, 6)
+#addAttendee(42, tempId)
