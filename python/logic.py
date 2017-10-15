@@ -16,7 +16,16 @@ def getFriends(token):
     id = get_id_from_token(token)
     friends = []
     for friend in databaseConnection.getFriends(id):
-        friends.append({"id": friend, "username": databaseConnection.getUsername(friend), "event": databaseConnection.getEvent(databaseConnection.getById(friend))["eventId"]})
+        event = databaseConnection.getEvent(databaseConnection.getById(friend)["eventId"])
+        event_map = None
+        if not event is None:
+            event_map = {}
+            event_map["title"] = event["title"]
+            event_map["creatorId"] = event["creatorId"]
+            event_map["startTime"] = event["startTime"]
+            event_map["endTime"] = event["endTime"]
+            event_map["attendees"] = event["attendees"]
+        friends.append({"id": friend, "username": databaseConnection.getUsername(friend), "event": event_map})
     return friends
 
 def addFriend(id, otherId):

@@ -130,8 +130,9 @@ def printEvents():
     for event in database.events.find():
         print(event)
 
-#addUser("144", "danny")
-#addUser("42", "alex")
-#addUser("7", "nathan")
+addUser("144", "danny")
+addUser("42", "alex")
+createEvent("Honors COllege", "42", 0, 1)
+#addUser(7, "nathan")
 #addFriend(144, 42)
 #addFriend(144, 7)

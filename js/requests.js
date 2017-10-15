@@ -11,6 +11,15 @@ function create(type) {
 }
 const text = (text) => document.createTextNode(text)
 
+const new_friend = (name, status) => {
+    document.getElementById('friends-feed')
+        .appendChild(
+            create('div',
+                create('b', text(name)),
+                create('i', text(status))))
+}
+    
+
 const new_post = (name, status, body) => {
     document.getElementById('friends-feed')
         .appendChild(
@@ -20,7 +29,7 @@ const new_post = (name, status, body) => {
                         create('b', text(name)),
                         create('i', text(status))),
                     create('button', text(BUTTON_TEXT))),
-                text(body)))
+                body))
 }
 
 function onSignIn(googleUser) {
@@ -54,17 +63,23 @@ function refresh() {
         }
         response.map((child) => {
             let status;
-            if(child.event == null) {
+            let joinable = false;
+            console.log(child)
+            if(!child.event) {
                 status = "Idle";
             } else {
                 if(child.event.attendees.includes(id)) {
                     status = "Joinable"
+                    joinable = true;
                 } else {
                     status = "Busy"
                 }
             }
-            console.log(child)
-            new_post(child.username, status, "BODY!")
+            if(joinable) {
+                new_post(child.username, status, "BODY!")
+            } else {
+                new_friend(child.username, status)
+            }
         })
     })
 }
