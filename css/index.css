@@ -45,6 +45,10 @@ article {
     align-items: center;
     width: 100%;
 }
+#friends-feed {
+    display: flex;
+    flex-direction: column;
+}
 /* A post object */
 details {
     border-style: solid;
@@ -66,16 +70,6 @@ summary {
     align-items: center;
     font-size: 18px
 }
-summary div {
-    display: flex;
-    justify-content: space-between;
-    algin-items: center;
-    width: 98%;
-    padding-right: 20px;
-}
-summary div:nth-child(1) {
-    margin-left: 10px;
-}
 summary:after {
     width: 2%;
     font-size: 20px;
@@ -94,4 +88,16 @@ section button {
     font-size: 24px;
     padding-top: 5px;
     padding-bottom: 5px;
+}
+/* Hide the default arrow */
+details > summary:first-of-type {
+    list-style-type: none;
+}
+details summary::-webkit-details-marker { display:none; }
+
+summary div {
+    width: 75%;
+}
+summary div * {
+    margin-left: 15px;
 }

@@ -2,20 +2,24 @@ const BUTTON_TEXT = 'Meet Up!'
 
 let token;
 
-const create = (type, children) => {
+function create(type) {
     const elem =  document.createElement(type)
-    children.map(child => document.appendChild)
+    console.log(Array.prototype.slice.call(arguments).slice(1))
+    Array.prototype.slice.call(arguments).slice(1).map(child => elem.appendChild(child))
+    return elem
 }
 const text = (text) => document.createTextNode(text)
 
 const new_post = (name, status, body) => {
-    document.getElementById('main-content')
+    document.getElementById('friends-feed')
         .appendChild(
             create('details', 
                 create('summary',
-                    create('b', text(name)),
-                    create('i', text(status)),
-                    create('button', text(BUTTON_TEXT)))))
+                    create('div',
+                        create('b', text(name)),
+                        create('i', text(status))),
+                    create('button', text(BUTTON_TEXT))),
+                text(body)))
 }
 
 function onSignIn(googleUser) {
@@ -41,7 +45,13 @@ function addFriend() {
 
 function refresh() {
     post_request('getFriends', { 'token': token }, (response) => {
-        console.log(response)
+        const contents = document.getElementById('friends-feed')
+        while (contents.firstChild) {
+            contents.removeChild(contents.firstChild);
+        }
+        response.map((child) => {
+            new_post(child.username, "Status:...", "BODY!")
+        })
     })
 }
         
