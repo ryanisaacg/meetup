@@ -9,6 +9,7 @@ class Handler(SimpleHTTPRequestHandler):
         length = int(self.headers['content-length'])
         data_string = self.rfile.read(length).decode('utf-8')
         print (data_string)
+        response = "PARTY"
         self.send_response(200)
         self.send_header('Content-type', 'text/html')
         self.send_header('Content-length',str(len(response)))
