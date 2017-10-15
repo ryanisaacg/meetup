@@ -28,7 +28,10 @@ class Handler(SimpleHTTPRequestHandler):
             eventName = data["eventName"]
             starTime = data["startTime"]
             endTime = data["endTime"]
-            response = logic.addEvent(logic.get_id_from_token, eventName, startTime, endTime)
+            response = logic.addEvent(logic.get_id_from_token(token), eventName, startTime, endTime)
+        elif "joinEvent" in self.path:
+            eventId = ["eventId"]
+            response = logic.joinEvent(logic.get_id_from_token(token),eventId)
         response_string = json.dumps(response)
         self.send_response(200)
         self.send_header('Content-type', 'text/html')
