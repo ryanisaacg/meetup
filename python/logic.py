@@ -21,7 +21,7 @@ def getFriends(token):
 
 def addFriend(id, otherId):
     return databaseConnection.addFriend(id, otherId)
-def createEvent(userId,eventName,startTime,endTime):
+def createEvent(eventName,id,startTime,endTime):
     return databaseConnetion.createEvent(userId,eventName,startTime,endTime)
 def joinEvent(id,eventId):
     return databaseConnetion.addAttendee(id,eventId)
